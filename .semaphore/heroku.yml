@@ -8,8 +8,12 @@ agent:
 blocks:
   - name: Deploy
     task:
+      env_vars:
+        - name: HEROKU_REMOTE
+          value: "https://git.heroku.com/uncut-myapp.git"
       jobs:
       - name: Deploy
         commands:
           - checkout
+          - git add remote heroku $HEROKU_REMOTE
           - git push -f heroku $SEMAPHORE_GIT_BRANCH:master

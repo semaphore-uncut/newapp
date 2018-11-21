@@ -1,5 +1,10 @@
 require 'rails_helper'
 
 RSpec.describe Image, type: :model do
-  pending "add some examples to (or delete) #{__FILE__}"
+
+  it "create a new record in db" do
+    image = Image.create(name: "Something")
+
+    expect(image).to be_persisted
+  end
 end

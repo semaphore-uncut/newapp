@@ -8,8 +8,17 @@ agent:
 blocks:
   - name: Deploy
     task:
+      secrets:
+        - name: newapp-heroku
+      env_vars:
+        - name: HEROKU_REMOTE
+          value: https://git.heroku.com/uncut-myapp.git
       jobs:
       - name: Deploy
         commands:
           - checkout
-          - echo "Deploy will happen here"
+          - chmod 600 ~/.ssh/id_rsa_heroku
+          - ssh-add ~/.ssh/id_rsa_heroku
+          - git config --global url.ssh://git@heroku.com/.insteadOf https://git.heroku.com/
+          - git remote add heroku $HEROKU_REMOTE
+          - git push heroku -f $SEMAPHORE_GIT_BRANCH:master

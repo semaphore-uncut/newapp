@@ -11,6 +11,10 @@ blocks:
       prologue:
         commands:
           - checkout
+          - rm -rf .ruby-version
+          - ruby -v
+          - sem-version ruby 2.4.4
+          - ruby -v
           - cache restore gems-$SEMAPHORE_GIT_BRANCH-$(checksum Gemfile.lock),gems-$SEMAPHORE_GIT_BRANCH-,gems-master-
           - bundle install --deployment -j 4 --path vendor/bundle
           - cache store gems-$SEMAPHORE_GIT_BRANCH-$(checksum Gemfile.lock) vendor/bundle
@@ -20,10 +24,6 @@ blocks:
       jobs:
       - name: RSpec - models
         commands:
-          - rm -rf .ruby-version
-          - ruby -v
-          - sem-version ruby 2.4.4
-          - ruby -v
           - bundle exec rspec
 
       - name: RSpec - request specs

@@ -16,6 +16,7 @@ blocks:
       jobs:
       - name: Deploy
         commands:
+          - ssh-keyscan -H heroku.com >> ~/.ssh/known_hosts
           - git config --global url.ssh://git@heroku.com/.insteadOf https://git.heroku.com/
           - chmod 600 ~/.ssh/id_rsa_heroku
           - ssh-add ~/.ssh/id_rsa_heroku

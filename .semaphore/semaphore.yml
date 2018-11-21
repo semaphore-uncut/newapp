@@ -21,3 +21,7 @@ blocks:
           - sem-service start postgres
           - bundle exec rake db:create db:migrate db:test:prepare
           - bundle exec rspec
+
+promotions:
+  - name: Heroku
+    pipeline_file: heroku.yml

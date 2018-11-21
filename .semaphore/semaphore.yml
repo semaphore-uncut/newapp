@@ -15,5 +15,8 @@ blocks:
       - name: Docker build
         commands:
           - checkout
+          - cache restore gems-$SEMAPHORE_BRANCH_NAME-$(checksum Gemfile.lock),gems-$SEMAPHORE_BRANCH_NAME,gems-master-
           - bundle install --deployment --path vendor/bundle -j 4
+          - cache store gems-$SEMAPHORE_BRANCH_NAME-$(checksum Gemfile.lock) vendor/bundle
+          - sem-service start postgres
           - bundle exec rspec

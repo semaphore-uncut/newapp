@@ -19,4 +19,5 @@ blocks:
           - bundle install --deployment --path vendor/bundle -j 4
           - cache store gems-$SEMAPHORE_GIT_BRANCH-$(checksum Gemfile.lock) vendor/bundle
           - sem-service start postgres
+          - bundle exec rake db:create db:migrate db:test:prepare
           - bundle exec rspec

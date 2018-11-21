@@ -1,0 +1,15 @@
+version: v1.0
+name: Heroku deployment
+agent:
+  machine:
+    type: e1-standard-2
+    os_image: ubuntu1804
+
+blocks:
+  - name: Deploy
+    task:
+      jobs:
+      - name: Deploy
+        commands:
+          - checkout
+          - echo "Deploy will happen here"

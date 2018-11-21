@@ -1,5 +1,5 @@
 version: v1.0
-name: First pipeline example
+name: Test
 agent:
   machine:
     type: e1-standard-2
@@ -18,3 +18,7 @@ blocks:
           - sem-service start postgres
           - bundle exec rake db:create db:migrate db:test:prepare
           - bundle exec rspec
+
+promotions:
+  - name: Deploy to Heroku
+    pipeline_file: heroku.yml

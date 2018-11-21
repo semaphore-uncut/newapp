@@ -1,6 +1,6 @@
 class HomeController < ApplicationController
 
   def index
-    render :plain => "Hi!!!1"
+    render :plain => "Hi!!! 🙌"
   end
 end

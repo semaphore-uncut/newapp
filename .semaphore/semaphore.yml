@@ -12,6 +12,11 @@ blocks:
       - name: RSpec
         commands:
           - checkout
+          - ruby -v
+          - sem-version ruby 2.4.4
+          - ruby -v
+          - sem-version ruby 2.5.1
+          - ruby -v
           - cache restore gems-$SEMAPHORE_GIT_BRANCH-$(checksum Gemfile.lock),gems-$SEMAPHORE_GIT_BRANCH-,gems-master-
           - bundle install --deployment -j 4 --path vendor/bundle
           - cache store gems-$SEMAPHORE_GIT_BRANCH-$(checksum Gemfile.lock) vendor/bundle

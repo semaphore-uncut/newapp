@@ -13,4 +13,6 @@ blocks:
         commands:
           - checkout
           - bundle install --deployment -j 4 --path vendor/bundle
+          - sem-service start postgres
+          - bundle exec rake db:create db:migrate db:test:prepare
           - bundle exec rspec

@@ -20,6 +20,10 @@ blocks:
       jobs:
       - name: RSpec - models
         commands:
+          - rm -rf .ruby-version
+          - ruby -v
+          - sem-version ruby 2.4.4
+          - ruby -v
           - bundle exec rspec
 
       - name: RSpec - request specs

@@ -12,7 +12,7 @@ blocks:
         commands:
           - checkout
       jobs:
-      - name: RSpec - models
+      - name: net test
         matrix:
           - env_var: RATE
             values: ["10K", "100K", "1M"]
@@ -22,6 +22,5 @@ blocks:
               - "https://s3.eu-west-2.amazonaws.com/hetzner-speedtest-eu-west2/elasticsearch-6.2.1.deb"
               - "https://s3.amazonaws.com/hetzner-speedtest-us-east1/elasticsearch-6.2.1.deb"
         commands:
-          - bundle exec rspec
           - "echo 'Rate: $RATE'"
           - "curl --limit-rate $RATE $URL > /dev/null"

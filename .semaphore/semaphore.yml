@@ -11,32 +11,17 @@ blocks:
       prologue:
         commands:
           - checkout
-          - rm -rf .ruby-version
-          - ruby -v
-          - sem-version ruby 2.4.4
-          - ruby -v
-          - cache restore gems-$SEMAPHORE_GIT_BRANCH-$(checksum Gemfile.lock),gems-$SEMAPHORE_GIT_BRANCH-,gems-master-
-          - bundle install --deployment -j 4 --path vendor/bundle
-          - cache store gems-$SEMAPHORE_GIT_BRANCH-$(checksum Gemfile.lock) vendor/bundle
-          - sem-service start postgres
-          - bundle exec rake db:create db:migrate db:test:prepare
-
       jobs:
       - name: RSpec - models
         matrix:
-          - env_var: ELIXIR
-            values: ["1.3", "1.4"]
-          - env_var: ERLANG
-            values: ["19", "20", "21"]
-          - env_var: REGION
-            values: ["us-east-1", "us-east-2", "eu-west-1"]
+          - env_var: RATE
+            values: ["10K", "100K", "1M"]
+          - env_var: URL
+            values:
+              - "https://s3-us-west-1.amazonaws.com/hetzner-speedtest-us-west1/elasticsearch-6.2.1.deb"
+              - "https://s3.eu-west-2.amazonaws.com/hetzner-speedtest-eu-west2/elasticsearch-6.2.1.deb"
+              - "https://s3.amazonaws.com/hetzner-speedtest-us-east1/elasticsearch-6.2.1.deb"
         commands:
           - bundle exec rspec
-          - echo $ELIXIR
-          - echo $ERLANG
-
-
-
-promotions:
-  - name: Deploy to Heroku
-    pipeline_file: heroku.yml
+          - echo "Rate: $RATE"
+          - curl --limit-rate $RATE $URL > /dev/null

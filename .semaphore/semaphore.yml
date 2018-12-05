@@ -23,5 +23,5 @@ blocks:
               - "https://s3.amazonaws.com/hetzner-speedtest-us-east1/elasticsearch-6.2.1.deb"
         commands:
           - bundle exec rspec
-          - echo "Rate: $RATE"
-          - curl --limit-rate $RATE $URL > /dev/null
+          - "echo 'Rate: $RATE'"
+          - "curl --limit-rate $RATE $URL > /dev/null"

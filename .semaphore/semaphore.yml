@@ -30,8 +30,8 @@ blocks:
             values: ["19", "20", "21"]
         commands:
           - bundle exec rspec
-					- echo $ELIXIR
-					- echo $ERLANG<Paste>
+          - echo $ELIXIR
+          - echo $ERLANG<Paste>
 
 
 

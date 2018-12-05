@@ -31,7 +31,7 @@ blocks:
         commands:
           - bundle exec rspec
           - echo $ELIXIR
-          - echo $ERLANG<Paste>
+          - echo $ERLANG
 
 
 
